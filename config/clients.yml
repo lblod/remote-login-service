@@ -1,0 +1,4 @@
+clients:
+  - id: "1c5d34ca-4a76-456e-9cac-5c39fabeb90f"
+    name: "example client"
+    endpoint: "https://gist.githubusercontent.com/nvdk/955f9723ce846cb84ba8490ca6eb50da/raw/b4e53a9ad53b7fe5bb027c2b49bb869bd6ef96bd/test.json"
