@@ -13,6 +13,13 @@ services:
       - './config/remotelogin:/app/config'
 ```
 
+Dispatcher.ex rules:
+```
+post "/remote-login/*path" do
+  Proxy.forward conn, [], "http://remotelogin/remote-login"
+end
+```
+
 An example config file is available in the config folder of this repository.
 
 ## usage
