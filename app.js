@@ -9,7 +9,7 @@ function get(obj, path) {
   const keys = path.split('.');
   var o = obj;
   for (const key of keys) {
-    if (o.hasOwnProperty(key))
+    if (o && o.hasOwnProperty(key))
       o = o[key];
     else {
       return null;
@@ -54,7 +54,10 @@ async function linkSessionToUser(body, sessionUri) {
   claims.family_name = get(body,'data.attributes.family-name');
   claims.identifier = get(body, 'data.attributes.identifier');
   const groupId = get(body, 'relationships.group.data.id');
+  if (!groupId)
+    throw "bestuurseenheid not specified";
   const { accountUri, accountId } = await ensureUserAndAccount(claims, groupId);
+  console.log(groupId);
   const groupUri = await selectBestuurseenheid(groupId);
   if (!groupUri)
     throw "bestuurseenheid not found";
@@ -79,9 +82,10 @@ app.post('/remote-login', async function( req, res ) {
   }
   else if (identityResponse.statusCode === 200) {
     try {
-      const body = JSON.parse(identityResponse.body);
+      const body = identityResponse.body;
       const sessionUri = req.headers['mu-session-id'];
       const { groupId, accountId, sessionId} = await linkSessionToUser(body, sessionUri);
+      console.log(sessionId);
       res.status(201).send(
         {
           "data": {
