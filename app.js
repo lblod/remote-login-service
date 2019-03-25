@@ -32,7 +32,8 @@ function parseRequestBody(req) {
 }
 
 async function fetchIdentity(endpoint, userToken) {
-  const resp = await needle('get',`${endpoint}?user-token=${userToken}`);
+  const tokenParam = endpoint.includes('?') ? `&user-token=${userToken}` : `?user-token=${userToken}`;
+  const resp = await needle('get',`${endpoint}${tokenParam}`);
   return resp;
 }
 
