@@ -4,9 +4,10 @@ this service is responsible for retrieving user information and linking it to a 
 ## configuration
 Example docker-compose snippet (for usage with seas):
 ```
+version: "3.4"
 services:
   remotelogin:
-    image: lblod/remotelogin
+    image: lblod/remote-login-service
     environment:
       MU_APPLICATION_GRAPH: 'http://mu.semte.ch/graphs/public'
     volumes:
