@@ -5,7 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "@lblod/mu-auth-sudo": "0.2.0",
-    "js-yaml": "^3.12.2",
+    "js-yaml": "^3.13.1",
     "needle": "^2.2.4"
   },
   "devDependencies": {},
