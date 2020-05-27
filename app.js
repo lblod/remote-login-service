@@ -86,7 +86,7 @@ app.post('/remote-login', async function( req, res ) {
       const sessionUri = req.headers['mu-session-id'];
       const { groupId, accountId, sessionId} = await linkSessionToUser(body, sessionUri);
       console.log(sessionId);
-      res.status(201).send(
+      res.header('mu-auth-allowed-groups', 'CLEAR').status(201).send(
         {
           "data": {
             "type": "remote-login",
